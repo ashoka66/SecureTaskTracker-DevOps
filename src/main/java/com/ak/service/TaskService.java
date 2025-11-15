@@ -71,7 +71,7 @@ public class TaskService {
 	    int id = idGenerator.incrementAndGet();
 
 	    // Log which thread is currently trying to add
-	    logger.info("🧵 Thread {} adding task: {}", Thread.currentThread().getName(), task);
+	    logger.info(" Thread {} adding task: {}", Thread.currentThread().getName(), task);
 
 ////	     Simulate a delay to increase chance of collision
 //	    try {
@@ -81,7 +81,7 @@ public class TaskService {
 //	    }
 
 	    taskMap.put(id, task);
-	    logger.info("✅ Thread {} finished adding task with ID: {}", Thread.currentThread().getName(), id);
+	    logger.info(" Thread {} finished adding task with ID: {}", Thread.currentThread().getName(), id);
 	}
 
 	
