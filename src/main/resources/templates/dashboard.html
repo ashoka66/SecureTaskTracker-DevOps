@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Dashboard - Secure Task Tracker</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<div class="container">
+    <h2>Task Dashboard</h2>
+
+    <form th:action="@{/addTask}" method="post">
+        <input type="text" name="task" placeholder="Enter new task" required>
+        <button type="submit">Add Task</button>
+    </form>
+
+    <ul>
+        <li th:each="taskEntry : ${tasks}">
+            <span th:text="${taskEntry.value}"></span>
+            <form th:action="@{'/deleteTask/' + ${taskEntry.key}}" method="post">
+                <button type="submit">Delete</button>
+            </form>
+        </li>
+    </ul>
+</div>
+</body>
+</html>
