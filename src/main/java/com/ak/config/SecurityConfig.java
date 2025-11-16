@@ -18,8 +18,8 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 	
 	//Define Inmemory users for simplicity
-	@Bean
-	public InMemoryUserDetailsManager userDetailsService() {
+	@Bean //TL updated method access member public to private 
+	private InMemoryUserDetailsManager userDetailsService() {
 		
 		UserDetails user = User.withUsername("admin").password("password").roles("USER").build();
 		return new InMemoryUserDetailsManager(user);
@@ -29,8 +29,8 @@ public class SecurityConfig {
 	
 	
 	//Define Security filterChain (authorization rules)
-	@Bean
-	public SecurityFilterChain securityFilterChain(HttpSecurity http)throws Exception{
+	@Bean //TL updated method access member public to private 
+	private SecurityFilterChain securityFilterChain(HttpSecurity http)throws Exception{
 		
 		http.authorizeHttpRequests(auth -> auth.requestMatchers("/login")
 				                                .permitAll()
@@ -48,7 +48,7 @@ public class SecurityConfig {
 	
 	//No password encoding for demo (never use in production)
 	@Bean
-	public static NoOpPasswordEncoder passwordEncoder() {
+	private static NoOpPasswordEncoder passwordEncoder() {
 		return(NoOpPasswordEncoder)  NoOpPasswordEncoder.getInstance();
 	}
 	
