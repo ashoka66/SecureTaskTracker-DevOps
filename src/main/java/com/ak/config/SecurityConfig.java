@@ -10,8 +10,7 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 
-//concept used :Spring Security + InMemory Authentication
-//Protects / dash board route and allows/login
+
 
 
 @Configuration
@@ -46,7 +45,8 @@ public class SecurityConfig {
 	}
 	
 	
-	//No password encoding for demo (never use in production)
+	//No password encoding for demo (never use in production very important)
+	// this code is depricated that's why it is showing the crossed lines on NoOpPasswordEndoder
 	@Bean
 	private static NoOpPasswordEncoder passwordEncoder() {
 		return(NoOpPasswordEncoder)  NoOpPasswordEncoder.getInstance();
