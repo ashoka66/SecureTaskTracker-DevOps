@@ -58,13 +58,7 @@ public class TaskService {
 	}//task service end
 	
 	
-//	//Add Task Into HashMap
-//	public void addTask(String task) {
-//		int id=taskMap.size() +1;
-//		taskMap.put(id,task);
-//		logger.info("Task added with id {}",id);
-//		
-//	}
+
 	
 	private final AtomicInteger idGenerator=new AtomicInteger(0);
 	public void addTask(String task) {
@@ -93,6 +87,7 @@ public class TaskService {
 		return taskMap;
 	}
 	
+	//for deleting the task
 	public void deleteTask(int id) {
 		taskMap.remove(id);
 		logger.info("Task with ID {} removed ",id);
