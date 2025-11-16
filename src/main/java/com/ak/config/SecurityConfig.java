@@ -11,13 +11,13 @@ import org.springframework.security.web.SecurityFilterChain;
 
 
 //concept used :Spring Security + InMemory Authentication
-//Protects / dashboard route and allows/login
+//Protects / dash board route and allows/login
 
 
 @Configuration
 public class SecurityConfig {
 	
-	//Define Inmemory users for simplicity
+	//Define In memory users for simplicity
 	@Bean //TL updated method access member public to private 
 	private InMemoryUserDetailsManager userDetailsService() {
 		
