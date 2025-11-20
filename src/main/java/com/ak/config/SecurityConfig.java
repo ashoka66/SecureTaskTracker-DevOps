@@ -51,6 +51,6 @@ public class SecurityConfig {
 	private static NoOpPasswordEncoder passwordEncoder() {
 		return(NoOpPasswordEncoder)  NoOpPasswordEncoder.getInstance();
 	}
-	
+
 
 }
