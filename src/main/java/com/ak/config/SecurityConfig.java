@@ -18,7 +18,7 @@ public class SecurityConfig {
 	
 	//Define In memory users for simplicity
 	@Bean //TL updated method access member public to private 
-	private InMemoryUserDetailsManager userDetailsService() {
+	public InMemoryUserDetailsManager userDetailsService() {
 		
 		UserDetails user = User.withUsername("admin").password("password").roles("USER").build();
 		return new InMemoryUserDetailsManager(user);
@@ -29,7 +29,7 @@ public class SecurityConfig {
 	
 	//Define Security filterChain (authorization rules)
 	@Bean //TL updated method access member public to private 
-	private SecurityFilterChain securityFilterChain(HttpSecurity http)throws Exception{
+	public SecurityFilterChain securityFilterChain(HttpSecurity http)throws Exception{
 		
 		http.authorizeHttpRequests(auth -> auth.requestMatchers("/login")
 				                                .permitAll()
@@ -48,7 +48,7 @@ public class SecurityConfig {
 	//No password encoding for demo (never use in production very important)
 	// this code is depricated that's why it is showing the crossed lines on NoOpPasswordEndoder
 	@Bean
-	private static NoOpPasswordEncoder passwordEncoder() {
+	public static NoOpPasswordEncoder passwordEncoder() {
 		return(NoOpPasswordEncoder)  NoOpPasswordEncoder.getInstance();
 	}
 
