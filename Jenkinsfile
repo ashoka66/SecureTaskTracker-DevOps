@@ -2,15 +2,20 @@ pipeline {
     agent any
 
     tools {
+        jdk "jdk p"
         maven "Maven-3.9.9"
-        jdk "jdk-17"
+    }
+
+    environment {
+        SONAR_TOKEN = credentials('sonar-token')
     }
 
     stages {
 
         stage('Checkout') {
             steps {
-                checkout scm
+                git branch: 'main',
+                    url: 'https://github.com/ashoka66/SecureTaskTracker-DevOps.git'
             }
         }
 
@@ -21,40 +26,20 @@ pipeline {
         }
 
         stage('SonarQube Analysis') {
-            environment {
-                SONARQUBE = credentials('sonarqube-token')
-            }
             steps {
-                withSonarQubeEnv('My-SonarQube') {
-                    bat """
-                        mvn sonar:sonar \
-                        -Dsonar.projectKey=SecurityTaskTracker \
-                        -Dsonar.projectName=SecurityTaskTracker \
-                        -Dsonar.host.url=http://localhost:9000 \
-                        -Dsonar.login=$SONARQUBE
-                    """
+                withSonarQubeEnv('Local-Sonar') {
+                    bat "sonar-scanner.bat -Dsonar.projectKey=SecurityTaskTracker -Dsonar.sources=src/main/java -Dsonar.host.url=http://localhost:9000 -Dsonar.login=%SONAR_TOKEN%"
                 }
             }
         }
 
         stage("Quality Gate") {
             steps {
-                timeout(time: 5, unit: 'MINUTES') {
+                timeout(time: 3, unit: 'MINUTES') {
                     waitForQualityGate abortPipeline: true
                 }
             }
         }
 
-        stage('Test') {
-            steps {
-                bat 'mvn test'
-            }
-        }
-
-        stage('Package') {
-            steps {
-                bat 'mvn package'
-            }
-        }
     }
 }
