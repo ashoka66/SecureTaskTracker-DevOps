@@ -16,7 +16,7 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh 'mvn clean install -DskipTests'
+                bat 'mvn clean install -DskipTests'
             }
         }
 
@@ -26,7 +26,7 @@ pipeline {
             }
             steps {
                 withSonarQubeEnv('My-SonarQube') {
-                    sh """
+                    bat """
                         mvn sonar:sonar \
                         -Dsonar.projectKey=SecurityTaskTracker \
                         -Dsonar.projectName=SecurityTaskTracker \
@@ -47,13 +47,13 @@ pipeline {
 
         stage('Test') {
             steps {
-                sh 'mvn test'
+                bat 'mvn test'
             }
         }
 
         stage('Package') {
             steps {
-                sh 'mvn package'
+                bat 'mvn package'
             }
         }
     }
